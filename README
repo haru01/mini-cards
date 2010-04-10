@@ -1,0 +1,29 @@
+= これは？
+
+* ただの学習アプリ
+
+= 技術要素
+
+* jquery
+* haml
+* sass
+* sinatra
+* rack
+* mongodb
+* mongomapper
+* webrat
+* shoulda
+
+
+= 学習リンクめも
+
+* http://jquery.com/
+* http://ursm.jp/mongo
+* http://gihyo.jp/dev/serial/01/ruby/0033
+* http://gihyo.jp/dev/serial/01/ruby/0031
+* http://railstips.org/blog/archives/2009/06/27/mongomapper-the-rad-mongo-wrapper/
+* http://www.sinatrarb.com/documentation
+* http://github.com/brynary/webrat
+* http://github.com/thoughtbot/shoulda
+* http://haml-lang.com/tutorial.html
+* http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html

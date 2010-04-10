@@ -1,0 +1,13 @@
+#post
+  %form.post(action='/cards' method='post')
+    %textarea#text(name='card[text]' type='text'){:value => @card.title, :onkeypress => "return onKey(event);"}
+    %input{:type => "button", :value => "post", :onclick => "post()"}
+
+#recent
+  #first_recent
+  - @cards.each do |c|
+    .card 
+      %p.text= c.text
+
+#navi
+  %a{:title => 'Next', :href => "/cards/#{@current_page+1}"} Next
