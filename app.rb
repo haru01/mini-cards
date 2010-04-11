@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require "models"
+require "card_service"
 
 limit = 50
 
