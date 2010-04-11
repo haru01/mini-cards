@@ -1,6 +1,6 @@
 #post
   %form.post(action='/cards' method='post')
-    %textarea#text(name='card[text]' type='text'){:value => @card.title, :onkeypress => "return onKey(event);"}
+    %textarea#text(name='card[text]' type='text'){:onkeypress => "return onKey(event);"}
     %input{:type => "button", :value => "post", :onclick => "post()"}
 
 #recent
