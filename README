@@ -1,8 +1,8 @@
-= これは？
+== これは？
 
-* ただの学習アプリ
+* ただの学習用に作成したminiアプリ
 
-= 技術要素
+== 技術要素
 
 * jquery
 * haml
@@ -14,13 +14,37 @@
 * webrat
 * shoulda
 
+== インストールめも
 
-= 学習リンクめも
+mongodbをダウンロード
+
+* http://www.mongodb.org/display/DOCS/Home
+
+mongodbの実行
+
+ bin/mongod
+
+bundlerのインストール
+
+ gem install bundler
+ export GEM_HOME=~/.bundle/ruby/1.8
+
+bundler を使って必要なgem インストール
+
+ bundle install
+ 
+実行
+
+ ruby app_test.rb
+ ruby app.rb
+
+== 学習リンクめも
 
 * http://jquery.com/
 * http://ursm.jp/mongo
 * http://gihyo.jp/dev/serial/01/ruby/0033
 * http://gihyo.jp/dev/serial/01/ruby/0031
+* http://www.mongodb.org/display/DOCS/Home
 * http://railstips.org/blog/archives/2009/06/27/mongomapper-the-rad-mongo-wrapper/
 * http://www.sinatrarb.com/documentation
 * http://github.com/brynary/webrat
