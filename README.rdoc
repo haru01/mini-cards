@@ -21,7 +21,8 @@ mongodbをダウンロード
 * http://www.mongodb.org/display/DOCS/Home
 
 mongodbの実行
-
+ 
+ cd <mongodb>
  bin/mongod
 
 bundlerのインストール
@@ -32,7 +33,12 @@ bundlerのインストール
 bundler を使って必要なgem インストール
 
  bundle install
+
+git clone
  
+ git clone git@github.com:haru01/mini-cards.git
+ cd mini-cards
+
 実行
 
  ruby app_test.rb
