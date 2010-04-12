@@ -4,7 +4,7 @@ require "models"
 require "card_service"
 
 limit = 50
-
+ 
 get '/' do
   redirect "/cards/1"
 end
@@ -18,9 +18,9 @@ end
 
 post "/cards" do
   @card = Card.new(params[:card])
-  @card.text = @card.text.gsub("\n", "<br/>").gsub("\s", "&nbsp;")
+  @card.text = @card.text
   if (@card.save)
-    haml '%p.text= text', :locals => { :text => @card.text }, :layout => false
+    haml '%p.text= text', :locals => { :text => @card.r_text }, :layout => false
   else
     haml '%p.error error', :locals => { :card => @card }, :layout => false
   end

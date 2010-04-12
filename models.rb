@@ -25,4 +25,8 @@ class Card
   key :text, String, :required  => true
   many :tag_card_lks
   timestamps!
+  
+  def r_text
+    text.gsub("\n", "<br/>").gsub("\s", "&nbsp;")
+  end
 end

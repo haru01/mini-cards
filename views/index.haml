@@ -7,7 +7,7 @@
   #first_recent
   - @cards.each do |c|
     .card 
-      %p.text= c.text
+      %p.text= c.r_text
 
 #navi
   %a{:title => 'Next', :href => "/cards/#{@current_page+1}"} Next

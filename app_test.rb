@@ -44,14 +44,15 @@ class AppTest < Test::Unit::TestCase
     
     should "post card" do
       # act
-      fill_in "text", :with => "living a world\nwawawa"
+      expect_text = "a living world"
+      fill_in "text", :with => expect_text
       click_button "post"      
       #assert
-      expect = "living&nbsp;a&nbsp;world<br/>"
+      expect_render_text = "a&nbsp;living&nbsp;world"
       # assert_have_selector("p", :content => expect)
       assert_have_selector("p", :class => 'text')
-      assert last_response.body.include?(expect)
-      assert_equal expect, Card.last(:order => "created_at").text
+      assert_equal expect_text, Card.last(:order => "created_at").text
+      assert last_response.body.include?(expect_render_text)
     end
   end
 end
