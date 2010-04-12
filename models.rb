@@ -7,6 +7,12 @@ class Tag
   include MongoMapper::Document
   key :key, String, :required  => true, :unique => true
   many :tag_card_lks
+  
+  #throught あるっけ
+  def cards
+    tag_card_lks.map{|lk| lk.card }
+  end
+  
   timestamps!
 end
 

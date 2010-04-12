@@ -6,8 +6,6 @@ set :environment, :test
 MongoMapper.database = 'mini-card-test'
 
 class CardServiceTest < Test::Unit::TestCase
-  alias :ok :assert_equal
-  alias :ok_not_nil :assert_not_nil
 
   context "Card Service" do
     setup do
@@ -21,19 +19,19 @@ class CardServiceTest < Test::Unit::TestCase
       should "save card" do
         expected = "card_text"
         card = Card.new(:text => expected)
-        @subject.save(card)
-        ok(expected, Card.last(:order => "created_at").text)      
+        @subject.save!(card)
+        assert_equal(expected, Card.last(:order => "created_at").text)
       end
     end
 
     context "save card with one new #tag" do
       setup do
-        @expected_tag = "my_new_tag#{Time.now.to_s.gsub(" ", "_")}" 
+        @expected_tag = "my_new_tag#{Time.now.to_s.gsub(" ", "_")}"
         @expected = "card_text ##{@expected_tag}"
         @card = Card.new(:text => @expected)
       end
       should "save card" do
-        @subject.save(@card)
+        @subject.save!(@card)
         assert_save_card_lk_tag
       end      
     end
@@ -47,7 +45,7 @@ class CardServiceTest < Test::Unit::TestCase
       end
       
       should "save card" do
-        @subject.save(@card)
+        @subject.save!(@card)
         assert_save_card_lk_tag
       end      
     end
@@ -63,13 +61,28 @@ class CardServiceTest < Test::Unit::TestCase
       end
       
       should "save card" do
-        @subject.save(@card)
+        @subject.save!(@card)
         actual_card = Card.last(:order => "created_at")
-        ok(@expected, actual_card.text)
+        assert_equal(@expected, actual_card.text)
         acutal_tag_keys = actual_card.tag_card_lks.map { |lk| lk.tag.key }.sort
-        ok 2, acutal_tag_keys.size
-        ok [@expected_tag, @expected_tag2].sort, acutal_tag_keys
+        assert_equal 2, acutal_tag_keys.size
+        assert_equal [@expected_tag, @expected_tag2].sort, acutal_tag_keys
       end      
+    end
+    
+    context "save card with tag" do
+      setup do
+        s = CardService.new
+        s.save!(Card.new(:text => "textA1 #memo_tag"))
+        s.save!(Card.new(:text => "textB1 #anther_tag"))
+        s.save!(Card.new(:text => "textA2 #memo_tag"))
+      end
+      
+      should "find card with tag" do
+        t = Tag.find_by_key("memo_tag")
+        assert_equal "textA1 #memo_tag", t.cards[0].text
+        assert_equal "textA2 #memo_tag", t.cards[1].text
+      end 
     end
   end
   
@@ -78,11 +91,11 @@ class CardServiceTest < Test::Unit::TestCase
     actual_tag = Tag.last(:order => "created_at")
     actual_lk  = TagCardLk.last(:order => "created_at")
   
-    ok(@expected, actual_card.text)
-    ok(@expected_tag, actual_tag.key)
-    ok_not_nil(actual_lk.card)
-    ok_not_nil(actual_lk.tag)
-    ok(actual_card, actual_lk.card)
-    ok(actual_tag, actual_lk.tag)
+    assert_equal(@expected, actual_card.text)
+    assert_equal(@expected_tag, actual_tag.key)
+    assert_not_nil(actual_lk.card)
+    assert_not_nil(actual_lk.tag)
+    assert_equal(actual_card, actual_lk.card)
+    assert_equal(actual_tag, actual_lk.tag)
   end
 end

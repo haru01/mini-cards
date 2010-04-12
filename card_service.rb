@@ -1,20 +1,20 @@
 class CardService
-  def save(card)
+  def save!(card)
     tag_keys = tag_keys(card.text)
-    tag_keys.size == 0 ? save_without_tag(card) : save_with_tag(card, tag_keys)
+    tag_keys.size == 0 ? save_without_tag!(card) : save_with_tag!(card, tag_keys)
   end
 
-  def save_without_tag(card)
-    card.save
+  def save_without_tag!(card)
+    card.save!
   end
   
-  def save_with_tag(card, tag_keys)
+  def save_with_tag!(card, tag_keys)
     tag_keys.each do |key|
-      tag = Card.find_by_key(key) || Tag.new(:key => key)
+      tag = Tag.find_by_key(key) || Tag.new(:key => key)
       lk = TagCardLk.new
       lk.tag = tag
       lk.card = card
-      lk.save
+      lk.save!
     end
   end
   
