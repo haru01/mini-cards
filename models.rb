@@ -6,20 +6,21 @@ MongoMapper.database = 'mini-card'
 class Tag
   include MongoMapper::Document
   key :key, String, :required  => true, :unique => true
-  many :tag_card_lks
+  many :tag_card_lks, :order =>  'created_at desc'
+  timestamps!
   
   #throught あるっけ
   def cards
     tag_card_lks.map{|lk| lk.card }
   end
   
-  timestamps!
 end
 
 class TagCardLk
   include MongoMapper::Document
   key :tag_id, ObjectId
   key :card_id, ObjectId
+  timestamps!
   
   belongs_to :tag
   belongs_to :card

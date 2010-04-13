@@ -80,8 +80,9 @@ class CardServiceTest < Test::Unit::TestCase
       
       should "find card with tag" do
         t = Tag.find_by_key("memo_tag")
-        assert_equal "textA1 #memo_tag", t.cards[0].text
-        assert_equal "textA2 #memo_tag", t.cards[1].text
+        
+        assert_equal "textA2 #memo_tag", t.cards[0].text
+        assert_equal "textA1 #memo_tag", t.cards[1].text
       end 
     end
   end

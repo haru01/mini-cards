@@ -28,7 +28,7 @@ post "/cards" do
 end
 
 get '/cards/tagged/:key' do |key|
-  @cards = Tag.find_by_key(key, :order => "tag_card_lks.create_at desc").cards.reverse
+  @cards = Tag.find_by_key(key).cards
   puts @cards[0].text
   @current_page = 1
   haml :index
