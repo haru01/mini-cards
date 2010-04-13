@@ -30,14 +30,14 @@ bundlerのインストール
  gem install bundler
  export GEM_HOME=~/.bundle/ruby/1.8
 
-bundler を使って必要なgem インストール
-
- bundle install
-
 git clone
  
  git clone git@github.com:haru01/mini-cards.git
  cd mini-cards
+
+bundler を使って必要なgem インストール
+
+ bundle install
 
 実行
 
