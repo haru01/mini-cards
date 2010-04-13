@@ -34,6 +34,7 @@ class Card
   timestamps!
   
   def r_text
-    text.gsub("\n", "<br/>").gsub("\s", "&nbsp;")
+    text.gsub(/(#[^\s\n]+)/){ "<a href='/cards/tagged/#{$1[1..-1]}'>#{$1}</a>" }
   end
 end
+

@@ -1,10 +1,9 @@
 function post() {
-  if ($("#text").val()) {
-    
+  if ($("#text").val()) {    
     $.post("/cards", $("form").serialize(), function(data){
-      $("#first_recent").after('<div class="card hoge"><p class="text">'+ data +'</p></div>')
+      $("#first_recent").after('<div class="card">'+ data +'</div>')
     });
-    $("#text").val("")
+    $("#text").val("");
     $("#text").focus();
   }
 }

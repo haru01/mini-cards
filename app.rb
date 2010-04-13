@@ -21,7 +21,7 @@ post "/cards" do
   @card = Card.new(params[:card])
   begin
     service.save!(@card)
-    haml '%p.text= text', :locals => { :text => @card.r_text }, :layout => false
+    haml '%pre.text= @card.r_text', :locals => { :text => @card.r_text }, :layout => false
   rescue Exception => e
     haml '%p.error= error', :locals => { :error =>  e.message }, :layout => false    
   end
