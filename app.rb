@@ -19,6 +19,7 @@ end
 post "/cards" do
   service = CardService.new
   @card = Card.new(params[:card])
+  @card.title = @card._id  unless @card.title
   begin
     service.save!(@card)
     haml '%pre.text= @card.r_text', :locals => { :text => @card.r_text }, :layout => false
