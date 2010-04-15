@@ -28,7 +28,7 @@ end
 
 class Card
   include MongoMapper::Document
-  
+  key :title, String, :unique => true
   key :text, String, :required  => true
   many :tag_card_lks
   timestamps!
@@ -36,5 +36,23 @@ class Card
   def r_text
     text.gsub(/(#[^\s\n]+)/){ "<a href='/cards/tagged/#{$1[1..-1]}'>#{$1}</a>" }
   end
+  
+  # def link_cards
+  #   Link.all(:from_id => self._id, :order => "no").map{|lk| lk.to }
+  # end
+  # 
+  # def linked_cards
+  #   Link.all(:to_id => self._id, :order => "no").map{|lk| lk.from }
+  # end
 end
 
+# class Link
+#   include MongoMapper::Document
+#   key :no, Integer
+#   key :from_id, ObjectId
+#   key :to_id, ObjectId
+#   timestamps!
+#   
+#   belongs_to :from, :class_name => 'Card'
+#   belongs_to :to, :class_name => 'Card'
+# end

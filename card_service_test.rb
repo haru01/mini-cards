@@ -73,14 +73,15 @@ class CardServiceTest < Test::Unit::TestCase
     context "save card with tag" do
       setup do
         s = CardService.new
-        s.save!(Card.new(:text => "textA1 #memo_tag"))
-        s.save!(Card.new(:text => "textB1 #anther_tag"))
-        s.save!(Card.new(:text => "textA2 #memo_tag"))
+        s.save!(Card.new(:text => "textA1 #memo_tag", :title => "A1"))
+        s.save!(Card.new(:text => "textB1 #anther_tag", :title => "B1"))
+        s.save!(Card.new(:text => "textA2 #memo_tag", :title => "A2"))
+        t = Tag.find_by_key("memo_tag")
+        assert_equal 2, t.cards.size
       end
       
       should "find card with tag" do
         t = Tag.find_by_key("memo_tag")
-        
         assert_equal "textA2 #memo_tag", t.cards[0].text
         assert_equal "textA1 #memo_tag", t.cards[1].text
       end 
