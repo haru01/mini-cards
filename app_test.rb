@@ -31,13 +31,13 @@ class AppTest < Test::Unit::TestCase
       TagCardLk.delete_all
     end
     
-    context "visit /cards/1" do
+    context "visit /cards/page/1" do
       setup do
         # arrange
         150.times {|i|
           Card.create!(:title => "title#{i}" , :text => "text" + i.to_s)
         }
-        visit "/cards/1"
+        visit "/cards/page/1"
       end
 
       should "入力フォームが表示される" do
@@ -48,6 +48,11 @@ class AppTest < Test::Unit::TestCase
       should "カード一覧が表示されている" do
         limit = 50
         assert_have_tag("pre", :class => "text", :count => limit)
+      end
+
+      should "Next リンクがクリックできる" do
+        click_link "Next"
+        assert last_response.ok?
       end
 
       context "ポストした場合" do
@@ -72,7 +77,7 @@ class AppTest < Test::Unit::TestCase
     context "#タグ付きでポストされた場合" do
       setup do
         @expect = "text #my_keyword"
-        visit "/cards/1"
+        visit "/cards/page/1"
         # act
         fill_in "text", :with => @expect
         click_button "post"

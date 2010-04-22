@@ -6,10 +6,10 @@ require "card_service"
 limit = 50
  
 get '/' do
-  redirect "/cards/1"
+  redirect "/cards/page/1"
 end
 
-get '/cards/:page' do |page|
+get '/cards/page/:page' do |page|
   @card = Card.new
   @current_page = page.to_i
   @cards = Card.all(:order => "created_at desc", :limit => limit, :offset => (@current_page - 1) * limit )
