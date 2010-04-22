@@ -35,6 +35,15 @@ get '/cards/tagged/:key' do |key|
   haml :index
 end
 
+get '/cards/title/:title' do |title|
+  @title = title
+  @card = Card.find_by_title(title)
+  if @card == nil
+    @card = Card.create(:title => title, :text => "無")
+  end
+  haml :card
+end
+
 get '/stylesheet.css' do
   content_type 'text/css', :charset => 'utf-8'
   sass :stylesheet

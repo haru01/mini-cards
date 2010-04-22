@@ -1,0 +1,42 @@
+body {
+  font-family: "Helvetica Neue", "Lucida Grande", "Arial";
+  font-size: 32px;
+  text-align: left;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  color: #555;
+  background-color: #2c4762; }
+
+#post textarea#text {
+  font-size: 36px;
+  margin-top: 5px;
+  width: 500px;
+  height: 140px; }
+#post input {
+  margin-top: 10px;
+  width: 500px;
+  font-size: 20px; }
+
+#post,
+div.card,
+#navi {
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: green 2px 2px 2px 2px;
+  margin-left: 80px;
+  margin-bottom: 15px;
+  padding: 5px;
+  width: 500px; }
+  #post .text,
+  div.card .text,
+  #navi .text {
+    margin: 10px 10px 10px 10px; }
+
+#post {
+  height: 175px; }
+
+div.card>h1 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 36px;
+  border-bottom: solid 2px gray;
+  border-bottom-width: 3px solid #999; }

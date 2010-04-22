@@ -112,5 +112,30 @@ class AppTest < Test::Unit::TestCase
         end
       end
     end
+    
+    context "visit /cards/title/*" do
+      context "指定したタイトルのカードがある場合" do
+        setup do
+          s = CardService.new
+          s.save!(Card.new(:title => "titleA", :text => "textA"))
+          visit "/cards/title/titleA"
+        end
+      
+        should "タグに関連したカード要素が表示される" do
+          assert_contain "textA"
+          assert_contain "titleA"
+        end
+      end
+      context "指定したタイトルのカードがない場合" do
+        setup do
+          visit "/cards/title/new_titleA"
+        end
+        
+        should "タグに関連したカード要素が表示される" do
+          assert_contain "new_titleA"
+          assert_contain "無"
+        end
+      end
+    end
   end
 end
