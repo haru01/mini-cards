@@ -2,8 +2,10 @@ require 'rubygems'
 require 'sinatra'
 require "models"
 require "card_service"
+require "uri"
 
 limit = 50
+service = CardService.new
  
 get '/' do
   redirect "/cards/page/1"
@@ -17,7 +19,6 @@ get '/cards/page/:page' do |page|
 end
 
 post "/cards" do
-  service = CardService.new
   @card = Card.new(params[:card])
   @card.title = @card._id  unless @card.title
   begin
@@ -42,6 +43,13 @@ get '/cards/title/:title' do |title|
     @card = Card.create(:title => title, :text => "無")
   end
   haml :card
+end
+
+post '/cards/title/:title/save' do |title|
+  @card = Card.find_by_id(params[:id])
+  @card.attributes = params[:card]
+  @card.save
+  redirect "/cards/title/#{URI.escape title}"
 end
 
 get '/stylesheet.css' do

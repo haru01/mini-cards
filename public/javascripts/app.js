@@ -7,3 +7,13 @@ function post() {
     $("#text").focus();
   }
 }
+
+function card_save() {
+  alert("call save");
+}
+
+function card_edit() {
+  $("div.card>form>input").show();
+  $("div.card>form>textarea").show();
+  $("div.card>form>.text").hide();
+}

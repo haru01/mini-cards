@@ -1,5 +1,9 @@
 .card
-  .edit{:align => "right"}
-    %a{:href => "#"} edit
-  %h1= @card.title
-  %pre.text= @card.r_text
+  %form(action='/cards/title/#{@card.title}/save' method='post')
+    .edit{:align => "right"}
+      %a{:href => "#", :onclick => "card_edit()"} edit
+    %h1= @card.title
+    %pre.text= @card.r_text
+    %textarea#input_text{:style => "display:none;"}(name='card[text]' type='text' value)= @card.text
+    %input{:type => "hidden"}(name='id' value='#{@card._id}')
+    %input{:style => "display:none;", :type => "submit", :value => "save"}

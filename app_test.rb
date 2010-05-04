@@ -137,5 +137,20 @@ class AppTest < Test::Unit::TestCase
         end
       end
     end
+    
+    context "/cards/title/:title/save" do
+      setup do
+        @expect_text = "期待値の文字列"
+        visit "/cards/title/new_titleA"
+        fill_in "input_text", :with => @expect_text
+        click_button "save"
+      end
+
+      should "入力内容が反映される" do
+        assert_contain @expect_text
+        actual = Card.find_by_title("new_titleA").text
+        assert_equal @expect_text, actual
+      end
+    end
   end
 end
